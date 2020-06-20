@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block body %}
+{% set fname = 'img/' + view.image %}
+<link rel="stylesheet"  href="{{ url_for('static' ,filename = 'css/home/style1.css')}}">
+	<div class="container my-3">
+		<div class="row">
+			<div class="col-lg-3">
+				<img  src="{{ url_for('static' ,filename = fname)}}" width="230px" height="250px">
+				<br>
+			</div>
+
+			 <div class="col-lg-9">
+				 <br>
+			 	<h1 >{{ view.name }}</h1>
+			 	<br>
+			 	<h3>Rs. {{ view.price }}</h3>
+			 	<br>
+			 	<h4>{{ view.description}} </h4>
+
+			 </div>
+		</div>
+		
+	</div>
+	
+	
+{% endblock %}

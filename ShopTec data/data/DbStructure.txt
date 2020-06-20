@@ -1,0 +1,16 @@
+Database structure :-
+
+[S.NO]          [TABLE NAME]                                         [COLUMNS]
+
+1.              Product                 Id, Name, barcode, UpdatedBy, CreatedOn, UpdatedOn, CreatedBy, price, Quantity
+ 
+2.              Customer                Id, Name,  phone, email, address, age  
+
+3.              Supplier                Id, Name, SupplierNo, address, email, phone 
+
+4.              Order                   Id, CreatedOn, CreatedBy, address, Email, OrderDate  
+
+5.              SalesTable              Id, SaleDate, CustomerId, TotalCharges
+
+6.              SaleProduct             Id, SaleId, ProductId, ProductPrice, Quantity, TemporaryId 
+                                                                                       
