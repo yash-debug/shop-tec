@@ -1,7 +1,11 @@
 from flask import Flask,render_template,flash, redirect,url_for,session,logging,request
 from flask_sqlalchemy import SQLAlchemy
+import os
+import json
 
+params = {"admin_user":'spd' , "admin_pass":'white'}
 app = Flask(__name__)
+app.secret_key = 'super-secret-key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/shop'
 db = SQLAlchemy(app)
 
@@ -60,10 +64,33 @@ class users(db.Model):
     email = db.Column(db.String(120))
     password = db.Column(db.String(80))
 
+
 @app.route("/")
 def  welcome():
     return render_template("welcome.html")
 
+@app.route("/dashboard", methods=["GET", "POST"])
+def  dashboard():
+    if('user' in session and session['user'] == params['admin_user']):
+        products = product.query.filter_by().all()
+        return render_template("dashboard.html", products=products)
+
+
+    if request.method=="POST":
+        username = request.form.get("aname")
+        userpass = request.form.get("apass")
+        if (username == params['admin_user'] and userpass == params['admin_pass']):
+            session['user'] = username
+            products = product.query.filter_by().all()
+            return render_template("dashboard.html", products=products)
+            
+    return render_template("login.html")
+
+@app.route('/logout')
+def logout():
+    session.pop('user')
+    return redirect('/dashboard')
+ 
 @app.route("/home")
 def home():
     products = product.query.filter_by().all()

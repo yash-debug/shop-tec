@@ -46,13 +46,14 @@
     <link href="{{ url_for('static' ,filename = 'css/signin.css')}}" rel="stylesheet">
   </head>
   <body class="text-center">
-    <form class="form-signin">
+    <a class="btn btn-secondary" href="/" role="button">Back</a>
+    <form class="form-signin" action="/dashboard" method="POST">
   <img class="mb-4" src="static/img/admin.png" alt="" width="72" height="72">
   <h1 class="h3 mb-3 font-weight-normal">Welcome Admin</h1>
-  <label for="inputEmail" class="sr-only">Username</label>
-  <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-  <label for="inputPassword" class="sr-only">Password</label>
-  <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+  <label for="aname" class="sr-only">Username</label>
+  <input type="aname" id="inputEmail" name="aname" class="form-control" placeholder="Email address">
+  <label for="apass" class="sr-only">Password</label>
+  <input type="password" id="inputPassword" name="apass" class="form-control" placeholder="Password">
   <div class="checkbox mb-3">
     <label>
       <input type="checkbox" value="remember-me"> Remember me
