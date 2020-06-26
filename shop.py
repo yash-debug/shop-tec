@@ -1,7 +1,8 @@
+#this is the python flask E-commerce website
+
 from flask import Flask,render_template,flash, redirect,url_for,session,logging,request
 from flask_sqlalchemy import SQLAlchemy
 import os
-import json
 
 params = {"admin_user":'spd' , "admin_pass":'white'}
 app = Flask(__name__)
@@ -95,7 +96,8 @@ def logout():
 def home():
     products = product.query.filter_by().all()
     user = users.query.filter_by().all()
-    return render_template("home.html", products=products, user=user)
+    flash("You have been logged in successfully.")
+    return render_template("home.html", products=products)
 
 
 @app.route("/login")
@@ -109,7 +111,7 @@ def clogin():
             passw = request.form["passw"]
             login = users.query.filter_by(username=uname, password=passw).first()
             if login is not None:
-                return redirect(url_for("home" , un=uname))
+                return redirect(url_for("home"))
         return render_template("customer_login.html")
 
 @app.route("/register", methods=["GET", "POST"])
@@ -123,7 +125,7 @@ def register():
         db.session.add(register)
         db.session.commit()
 
-        return redirect(url_for("customer_login"))
+        return render_template("customer_login.html")
     return render_template("register.html")
 
 @app.route('/viewproduct/<string:id>', methods=["GET"])

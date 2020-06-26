@@ -10,6 +10,7 @@
 
   <title>Shop-Tec</title>
 
+
   <link href="{{ url_for('static' ,filename = 'vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
   <!-- Custom styles for this template -->
@@ -19,20 +20,30 @@
 </head>
 
 <body>
-
+    
+  
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #fa8072!important">
     <div class="container">
-      <a class="navbar-brand" style="font-size: 25px" href="/">Shop-Tec</a>
+      <a class="navbar-brand" style="font-size: 20px">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class=flashes>
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      {% endwith %}
+      </a>
+
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="/">Home
-              <span class="sr-only">(current)</span>
-            </a>
+            <a class="nav-link" href="/">Back</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">About</a>
@@ -143,7 +154,7 @@
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script>
-    alert("Welcome Sir !")
+    alert("Welcome sir !")
   </script>
 
 </body>
