@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-    <title>Login</title>
+    <title>Edit</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/">
 
@@ -46,19 +46,20 @@
     <link href="{{ url_for('static' ,filename = 'css/signin.css')}}" rel="stylesheet">
   </head>
   <body class="text-center">
-    <form class="form-signin" action="/home" method="POST">
+    <a class="btn btn-secondary" href="/" role="button">Back</a>
+    <form class="form-signin" action="/dashboard" method="POST">
   <img class="mb-4" src="static/img/admin.png" alt="" width="72" height="72">
-  <h1 class="h3 mb-3 font-weight-normal">Welcome Sir</h1>
-  <label class="sr-only">Username</label>
-  <input type="uname" id="inputEmail" name="uname" class="form-control" placeholder="Username" required autofocus>
-  <label for="upass" class="sr-only">Password</label>
-  <input type="upass" id="passw" name="passw"  ++ class="form-control" placeholder="Password" required>
+  <h1 class="h3 mb-3 font-weight-normal">Welcome Admin</h1>
+  <label for="aname" class="sr-only">Username</label>
+  <input type="aname" id="inputEmail" name="aname" class="form-control" placeholder="Email address">
+  <label for="apass" class="sr-only">Password</label>
+  <input type="password" id="inputPassword" name="apass" class="form-control" placeholder="Password">
   <div class="checkbox mb-3">
     <label>
       <input type="checkbox" value="remember-me"> Remember me
     </label>
   </div>
-  <button href="/home" class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
   <p class="mt-5 mb-3 text-muted">&copy; ShopTec 2020</p>
 </form>
 </body>

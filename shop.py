@@ -92,12 +92,26 @@ def logout():
     session.pop('user')
     return redirect('/dashboard')
  
-@app.route("/home")
+@app.route("/home", methods=["POST", "GET"])
 def home():
-    products = product.query.filter_by().all()
-    user = users.query.filter_by().all()
-    flash("You have been logged in successfully.")
-    return render_template("home.html", products=products)
+    person = users.query.filter_by().all()
+    if('user' in session):
+        products = product.query.filter_by().all()
+        return render_template("home.html", products=products)          
+
+    if request.method == "POST":
+        uname = request.form["uname"]
+        passw = request.form["passw"]
+        session['user'] = uname
+        products = product.query.filter_by().all()
+        return render_template("home.html", products=products)
+    
+    return render_template("customer_login.html")    
+
+@app.route('/clogout')
+def clogout():
+    session.pop('user')
+    return redirect('/')
 
 
 @app.route("/login")
@@ -106,13 +120,7 @@ def login():
 
 @app.route("/customerlogin", methods=["GET", "POST"])
 def clogin():
-        if request.method == "POST":
-            uname = request.form["uname"]
-            passw = request.form["passw"]
-            login = users.query.filter_by(username=uname, password=passw).first()
-            if login is not None:
-                return redirect(url_for("home"))
-        return render_template("customer_login.html")
+    return render_template("customer_login.html")
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -132,6 +140,16 @@ def register():
 def view_product(id):
     view = product.query.filter_by(id=id).first()
     return render_template("viewproduct.html", view=view)
+
+@app.route('/delete/<string:id>', methods=["GET","POST"])
+def delete(id):
+    if('user' in session and session['user'] == params['admin_user']):
+        item = product.query.filter_by(id=id).first()
+        db.session.delete(item)
+        db.session.commit()
+    return redirect('/dashboard')
+
+             
 
 
 app.run(debug=True)
