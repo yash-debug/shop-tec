@@ -149,6 +149,30 @@ def delete(id):
         db.session.commit()
     return redirect('/dashboard')
 
+@app.route('/edit/<string:id>', methods=["GET","POST"])
+def edit(id):
+    if('user' in session and session['user'] == params['admin_user']):
+
+        if request.method == "POST":
+            prod_name = request.form.get('name')
+            prod_price = request.form.get('price')
+            prod_quantity = request.form.get('quantity')
+            prod_description = request.form.get('description')
+
+            if id=="0":
+                new_item = product(name=prod_name, price=prod_price, quantity=prod_quantity, description=prod_description)
+                db.session.add(new_item)
+                db.session.commit()
+            else:
+                item = product.query.filter_by(id=id).first()
+                item.name = prod_name
+                item.price = prod_price
+                item.quantity = prod_quantity
+                item.description = prod_description
+                db.session.commit()
+                return redirect('/dashboard')
+        items = product.query.filter_by(id=id).first()
+        return render_template('edit.html', id=id, item=items)             
              
 
 
