@@ -28,13 +28,13 @@ class customer(db.Model):
 class product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
-    updated_on = db.Column(db.Integer)
-    updated_by = db.Column(db.String(80))
-    created_on = db.Column(db.Integer)
-    created_by = db.Column(db.String(50))
+    updated_on = db.Column(db.Integer, nullable=True)
+    updated_by = db.Column(db.String(80), nullable=True)
+    created_on = db.Column(db.Integer, nullable=True)
+    created_by = db.Column(db.String(50), nullable=True)
     price = db.Column(db.Integer)
     quantity = db.Column(db.Integer)
-    image = db.Column(db.String(50))
+    image = db.Column(db.String(50), nullable=True)
     description = db.Column(db.String(120))
 
 class sellproduct(db.Model):
@@ -160,9 +160,10 @@ def edit(id):
             prod_description = request.form.get('description')
 
             if id=="0":
-                new_item = product(name=prod_name, price=prod_price, quantity=prod_quantity, description=prod_description)
-                db.session.add(new_item)
+                newitem = product(name=prod_name, price=prod_price, quantity=prod_quantity, description=prod_description)
+                db.session.add(newitem)
                 db.session.commit()
+                return redirect('/dashboard')
             else:
                 item = product.query.filter_by(id=id).first()
                 item.name = prod_name
