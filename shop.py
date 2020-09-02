@@ -7,7 +7,7 @@ import os
 params = {"admin_user":'spd' , "admin_pass":'white'}
 app = Flask(__name__)
 app.secret_key = 'super-secret-key'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/shop'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/shop'
 db = SQLAlchemy(app)
 
 class orders(db.Model):
